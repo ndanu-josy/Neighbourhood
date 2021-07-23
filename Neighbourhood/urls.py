@@ -21,7 +21,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 urlpatterns = [
     url('admin/', admin.site.urls),
     url(r'', include('neighapp.urls')),
-    # path(r'^accounts/', include('registration.backends.simple.urls')),
+  
     # path(r'^api-token-auth/', obtain_auth_token),
     
 ]
