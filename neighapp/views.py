@@ -8,6 +8,9 @@ from django.shortcuts import render, redirect
 def index(request):
     return render(request, 'index.html')
 
+def profile(request):
+    return render(request, 'index.html')
+    
 def register(request):
     if request.method=="POST":
         form=RegistrationForm(request.POST)
