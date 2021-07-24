@@ -1,5 +1,5 @@
 from django.contrib.auth import login
-from neighapp.forms import NeighbourHoodForm, RegistrationForm
+from neighapp.forms import NeighbourHoodForm, RegistrationForm, profileForm, userForm
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
@@ -9,9 +9,22 @@ from django.contrib import messages
 def index(request):
     return render(request, 'index.html')
 
+@login_required(login_url='/accounts/login/')
 def profile(request):
-    return render(request, 'index.html')
-    
+ 
+    if request.method == 'POST':
+        user_form = userForm(request.POST, instance=request.user)
+        profile_form = profileForm(
+            request.POST, request.FILES, instance=request.user)
+        if  profile_form.is_valid() and user_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            return redirect('index')
+    else:        
+        profile_form = profileForm(instance=request.user)
+        user_form =userForm(instance=request.user)         
+    return render(request,'user_profile.html',{"user_form":user_form,"profile_form": profile_form}) 
+
 def register(request):
     if request.method=="POST":
         form=RegistrationForm(request.POST)
