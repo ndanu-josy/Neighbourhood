@@ -1,0 +1,146 @@
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
+  <style>
+     .container {
+  max-width: 960px;
+}
+.navbar-survival101 {
+  background-color:#2B6DAD;
+}
+/* .navbar-survival101 .navbar-brand {
+  margin-right: 2.15rem;
+  padding: 3px 0 0 0;
+  line-height: 36px;
+} */
+
+.navbar-survival101 .navbar-brand img {
+  vertical-align: baseline;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link {
+  color: #fff;
+}
+
+.search-box {
+  position: relative;
+  height: 34px;
+}
+.search-box input {
+  border: 0;
+  border-radius: 3px !important;
+  padding-right: 28px;
+  font-size: 15px;
+}
+
+.search-box .input-group-btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 999;
+}
+
+.search-box .input-group-btn button {
+  background-color: transparent;
+  border: 0;
+  padding: 4px 8px;
+  color: rgba(0,0,0,.4);
+  font-size: 20px;
+}
+
+.search-box .input-group-btn button:hover,
+.search-box .input-group-btn button:active,
+.search-box .input-group-btn button:focus {
+  color: rgba(0,0,0,.4);
+}
+
+@media (min-width: 992px) {
+  .navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: .7rem;
+    padding-left: .7rem;
+  }
+  
+  .search-box {
+    width: 300px !important;
+  }
+}
+
+.caroulsel {
+  width: 100%;
+  overflow: hidden;
+  padding: 5px 0 5px 5px;
+}
+
+.caroulsel-wrap {
+  white-space: nowrap;
+  font-size: 0;
+}
+
+.caroulsel-wrap a {
+  display: inline-block;
+  width: 134px;
+  height: 92px;
+  background-color: silver;
+  border: #ccc 1px solid;
+  margin-right: 5px;
+}
+
+    
+  </style>
+</head>
+
+
+
+<nav class="navbar navbar-inverse">
+	<div class="container-fluid">
+		<!-- Nav Header -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse-1" aria-expanded="false">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#"><span class="fa fa-home"></span><span class="link"> Home</span></a>
+		</div>
+		<!-- Nav Collapse -->
+		<div class="navbar-collapse collapse" id="collapse-1">
+			<!-- Nav Left -->
+			<ul class="nav navbar-nav">
+				<!-- Products -->
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+						<span class="fa fa-tags"></span><span class="link"> Products</span> <span class="fa fa-caret-down"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#"><span class="fa fa-tag"></span> Catalogue 1</a></li>
+						<li><a href="#"><span class="fa fa-tag"></span> Catalogue 2</a></li>
+					</ul>
+				</li>
+				<!-- Services -->
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+						<span class="fa fa-gears"></span><span class="link"> Services</span> <span class="fa fa-caret-down"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="#"><span class="fa fa-gear" /></span> Service 1</a></li>
+						<li><a href="#"><span class="fa fa-gear" /></span> Service 2</a></li>
+						<li><a href="#"><span class="fa fa-gear" /></span> Service 3</a></li>
+					</ul>
+				</li>
+				<!-- About -->
+				<li><a href="#"><span class="fa fa-info-circle"></span><span class="link"> About</span></a></li>
+				<!-- Contact -->
+				<li><a href="#"><span class="fa fa-phone"></span><span class="link"> Contact</span></a></li>
+			</ul>
+			<!-- Nav Right -->
+			<form class="navbar-form navbar-right">
+				<div class="form-group">
+					<input type="text" class="form-control" placeholder="Search">
+				</div>
+				<button type="submit" class="btn"><span class="fa fa-search"></span></button>
+			</form>
+		</div>
+	</div>
+</nav>
