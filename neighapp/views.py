@@ -39,7 +39,7 @@ def create_neighbourhood(request):
             neighbourhood.save()
             messages.success(
                 request, 'You have succesfully created a Neighbourhood.Now proceed and join the Neighbourhood')
-            return redirect('neighbourhood')
+            return redirect('index')
     else:
         form = NeighbourHoodForm()
-    return render(request, 'new_hood.html', {'form': form})
+    return render(request, 'create_hood.html', {'form': form})

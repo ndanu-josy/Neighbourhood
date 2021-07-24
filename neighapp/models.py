@@ -6,7 +6,7 @@ from cloudinary.models import CloudinaryField
 class Neighbourhood(models.Model):
     neighbourhood_name= models.CharField(max_length=80)
     neighbourhood_location = models.CharField(max_length=80)
-    occupants_count = models.IntegerField()
+    occupants_count = models.IntegerField(null=True)
     admin = models.ForeignKey(User, on_delete=models.CASCADE, related_name='adminstrator')
 
     def __str__(self):
