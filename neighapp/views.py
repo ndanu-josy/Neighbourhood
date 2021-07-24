@@ -1,13 +1,15 @@
+from neighapp.models import Neighbourhood
 from django.contrib.auth import login
 from neighapp.forms import NeighbourHoodForm, RegistrationForm, profileForm, userForm
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    hoods = Neighbourhood.objects.all()
+    return render(request, 'index.html', {"hoods":hoods})
 
 @login_required(login_url='/accounts/login/')
 def profile(request):
@@ -51,8 +53,18 @@ def create_neighbourhood(request):
             neighbourhood.admin = request.user
             neighbourhood.save()
             messages.success(
-                request, 'You have succesfully created a Neighbourhood.Now proceed and join the Neighbourhood')
+                request, 'You have succesfully created a Neighbourhood')
             return redirect('index')
     else:
         form = NeighbourHoodForm()
     return render(request, 'create_hood.html', {'form': form})
+
+@login_required(login_url='/accounts/login/')
+def join_neighbourhood(request, id):
+    neighbourhood = get_object_or_404(Neighbourhood, id=id)
+    request.user.id = neighbourhood
+    request.user.id.save()
+    messages.success(
+        request, 'Success! You have succesfully joined this Neighbourhood ')
+    return redirect('index')
+

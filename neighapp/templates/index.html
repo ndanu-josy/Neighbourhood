@@ -1,8 +1,28 @@
-
 {%extends 'base.html'%}
 {%load bootstrap3%}
 {%block content%}
+<div class="container">
+    <h1>Hello neighbour</h1>
+    <a class="btn btn-info" href="{% url 'createHood' %}">Create Neighbourhood</a>
+    {% for hood in hoods %}
+    <div class="col-md-3">
+        <div class="panel panel-default">
+            <div class="panel-header">
+                {{ hood.neighbourhood_location }}
+            </div>
+            <div class="panel-body">
+                <img src="{{ hood.photo.url }}" alt="{{ neighbourhood.name }}" height="300px">
+                {{ hood.neighbourhood_name }}
+            </div>
+            <div class="panel-footer">
+                <a class="btn btn-info" href="{% url 'joinHood' hood.id%}">Join</a>
+            </div>
+        </div>
+        <p></p>
+    </div>
 
-<h1>Hello neighbour</h1>
-<a class="btn btn-info" href="{% url 'createHood' %}">Create Neighbourhood</a>
+    {%endfor%}
+
+</div>
+
 {%endblock%}
