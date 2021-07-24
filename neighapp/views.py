@@ -1,9 +1,10 @@
 from django.contrib.auth import login
-from neighapp.forms import RegistrationForm
+from neighapp.forms import NeighbourHoodForm, RegistrationForm
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
-
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
@@ -26,3 +27,19 @@ def register(request):
     else:
         form= RegistrationForm()
     return render(request, 'registration/registration_form.html', {"form":form}) 
+
+
+@login_required(login_url='/accounts/login/')
+def create_neighbourhood(request):
+    if request.method == 'POST':
+        form = NeighbourHoodForm(request.POST, request.FILES)
+        if form.is_valid():
+            neighbourhood = form.save(commit=False)
+            neighbourhood.admin = request.user
+            neighbourhood.save()
+            messages.success(
+                request, 'You have succesfully created a Neighbourhood.Now proceed and join the Neighbourhood')
+            return redirect('neighbourhood')
+    else:
+        form = NeighbourHoodForm()
+    return render(request, 'new_hood.html', {'form': form})
