@@ -17,3 +17,8 @@ class UserProfile(models.Model):
     general_location= models.CharField(max_length=100)
     neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE, blank=True, null=True)
 
+class Business(models.Model): 
+    business_name= models.CharField(max_length=100)
+    user= models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='business_owner')
+    neighbourhood_id = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE, blank=True, null=True)
+    business_email = models.CharField(max_length=50)
