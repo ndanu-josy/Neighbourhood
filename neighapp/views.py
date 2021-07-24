@@ -1,4 +1,4 @@
-from neighapp.models import Neighbourhood
+from neighapp.models import Business, Neighbourhood
 from django.contrib.auth import login
 from neighapp.forms import NeighbourHoodForm, RegistrationForm, profileForm, userForm
 from django.shortcuts import get_object_or_404, render
@@ -68,3 +68,22 @@ def join_neighbourhood(request, id):
         request, 'Success! You have succesfully joined this Neighbourhood ')
     return redirect('index')
 
+@login_required(login_url='/accounts/login/')
+def single_hood(request, hood_id):
+    neighbourhood = Neighbourhood.objects.get(id=hood_id)
+    business = Business.objects.filter(neighbourhood=neighbourhood)
+    posts = Post.objects.filter(neighbourhood=neighbourhood)
+    posts = posts[::-1]
+    if request.method == 'POST':
+        form = BusinessForm(request.POST)
+        if form.is_valid():
+            b_form = form.save(commit=False)
+            b_form.neighbourhood = neighbourhood
+            b_form.user = request.user.profile
+            b_form.save()
+            return redirect('single-hood', neighbourhood.id)
+    else:
+        form = BusinessForm()
+    
+    return render(request, 'single_hood.html', { 'neighbourhood': neighbourhood, 'business': business,
+     'form': form,'posts': posts})

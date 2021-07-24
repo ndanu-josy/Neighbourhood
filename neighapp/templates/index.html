@@ -4,25 +4,28 @@
 <div class="container">
     <h1>Hello neighbour</h1>
     <a class="btn btn-info" href="{% url 'createHood' %}">Create Neighbourhood</a>
-    {% for hood in hoods %}
-    <div class="col-md-3">
-        <div class="panel panel-default">
-            <div class="panel-header">
-                {{ hood.neighbourhood_location }}
+    <div class="row">
+        {% for hood in hoods %}
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-header">
+                    {{ hood.neighbourhood_location }}
+                </div>
+                <div class="panel-body">
+                    <img src="{{ hood.photo.url }}" alt="{{ neighbourhood.name }}" height="300px">
+                    {{ hood.neighbourhood_name }}
+                </div>
+                <div class="panel-footer">
+                    <p>    {{ hood.occupants_count }}</p>
+                    <a class="btn btn-info" href="{% url 'joinHood' hood.id%}">Join</a>
+                    <a class="btn btn-info" href="{% url 'joinHood' hood.id%}">View Hood</a>
+                </div>
             </div>
-            <div class="panel-body">
-                <img src="{{ hood.photo.url }}" alt="{{ neighbourhood.name }}" height="300px">
-                {{ hood.neighbourhood_name }}
-            </div>
-            <div class="panel-footer">
-                <a class="btn btn-info" href="{% url 'joinHood' hood.id%}">Join</a>
-            </div>
+            <p></p>
         </div>
-        <p></p>
+
+        {%endfor%}
     </div>
-
-    {%endfor%}
-
 </div>
 
 {%endblock%}
