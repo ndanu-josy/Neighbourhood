@@ -1,4 +1,4 @@
-from neighapp.models import Business, Neighbourhood, Post, UserProfile
+from neighapp.models import Business, Neighbourhood, Post, Profile
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -18,8 +18,8 @@ class RegistrationForm(UserCreationForm):
 
 class profileForm(forms.ModelForm):
     class Meta:
-        model = UserProfile
-        fields = [ 'profile_pic', 'bio']        
+        model = Profile
+        exclude = [ 'user', 'neighbourhood']        
 
 class userForm(forms.ModelForm):
     email = forms.EmailField()

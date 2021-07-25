@@ -59,14 +59,14 @@ def create_neighbourhood(request):
         form = NeighbourHoodForm()
     return render(request, 'create_hood.html', {'form': form})
 
+
+
 @login_required(login_url='/accounts/login/')
 def join_neighbourhood(request, id):
-    neighbourhood = get_object_or_404(Neighbourhood, id=id)
-    request.user.id = neighbourhood
-    request.user.id.save()
-    messages.success(
-        request, 'Success! You have succesfully joined this Neighbourhood ')
-    return redirect('index')
+    hood = get_object_or_404(Neighbourhood, id=id)
+    request.user.profile.neighbourhood = hood
+    request.user.profile.save()
+    return redirect('index')    
 
 @login_required(login_url='/accounts/login/')
 def single_hood(request, hood_id):
