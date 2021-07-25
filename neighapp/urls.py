@@ -9,5 +9,7 @@ urlpatterns=[
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'profile/', views.profile, name='profile'),
     url('createHood/', views.create_neighbourhood, name='createHood'),
-    path('joinHood/<id>', views.join_neighbourhood, name='joinHood'),
+   
+    url('joinHood', views.join_neighbourhood, name='joinHood'),
+     url('singleHoodm', views.single_hood, name='singleHood'),
 ]

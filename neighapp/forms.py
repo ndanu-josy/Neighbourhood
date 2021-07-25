@@ -1,4 +1,4 @@
-from neighapp.models import Neighbourhood, UserProfile
+from neighapp.models import Business, Neighbourhood, Post, UserProfile
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
@@ -30,4 +30,14 @@ class userForm(forms.ModelForm):
 class NeighbourHoodForm(forms.ModelForm):
     class Meta:
         model = Neighbourhood
-        exclude = ('occupants_count', 'admin',)
+        exclude = ('occupants_count', 'admin')
+
+class PostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        exclude = ('user', 'neighbourhood')
+
+class BusinessForm(forms.ModelForm):
+    class Meta:
+        model = Business
+        exclude = ('user', 'neighbourhood')

@@ -1,6 +1,6 @@
-from neighapp.models import Business, Neighbourhood
+from neighapp.models import Business, Neighbourhood, Post
 from django.contrib.auth import login
-from neighapp.forms import NeighbourHoodForm, RegistrationForm, profileForm, userForm
+from neighapp.forms import BusinessForm, NeighbourHoodForm, RegistrationForm, profileForm, userForm
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect

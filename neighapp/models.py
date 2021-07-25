@@ -71,4 +71,13 @@ class Business(models.Model):
 
     def update_business(self):
         name = self.business_name
-        self.business_name = name         
+        self.business_name = name   
+
+
+class Post(models.Model):
+    user = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='poster')
+    post_category = models.CharField(max_length=120)
+    post_title = models.CharField(max_length=100, null=True)
+    post_description = models.TextField()
+    date_posted = models.DateTimeField(auto_now_add=True)   
+    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE, related_name='neighbourhood_post')               
