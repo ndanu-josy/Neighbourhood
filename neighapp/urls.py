@@ -10,5 +10,6 @@ urlpatterns=[
     url(r'profile/', views.profile, name='profile'),
     url('createHood/', views.create_neighbourhood, name='createHood'),
     path('joinhood/<id>', views.join_neighbourhood, name='joinhood'),   
-    url('singleHoodm', views.single_hood, name='singleHood'),
+    path('leavehood/<id>', views.leave_neighbourhood, name='leavehood'),
+    path('singleHood/<hood_id>', views.single_neighbourhood, name='singleHood'),
 ]

@@ -12,14 +12,14 @@
                     {{ hood.neighbourhood_location }}
                 </div>
                 <div class="panel-body">
-                    <img src="{{hood.hood_photo.url}}" class="img-responsive" alt="{{image.hood_name}}"
+                    <img src="{{hood.neighbourhood_photo.url}}" class="img-responsive" alt="{{image.hood_name}}"
                     style="width:100%;width:100%">
                     {{ hood.neighbourhood_name }}
                 </div>
                 <div style="padding-top:1%;padding-bottom:1%">
                     {%if request.user.profile.neighbourhood == hood %}
-                    <a class="btn btn-info btn-small" href="/">View Hood</a>
-                    <a class="btn btn-warning" href="/">Leave Hood</a>
+                    <a class="btn btn-info btn-small" href="{% url 'singleHood' hood.id %}">View Hood</a>
+                    <a class="btn btn-warning" href="{%url 'leavehood' hood.id%}">Leave Hood</a>
                     {%elif not request.user.profile.neighbourhood%}
                     <a class="btn btn-default" href="{%url 'joinhood' hood.id%}">Join Hood</a>
                     {%endif%}

@@ -1,0 +1,78 @@
+{%include 'base.html'%}
+
+{% load bootstrap3 %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <div class=" col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-header">
+                {{ neighbourhood.name }}
+                {{neighbourhood.location}}
+            </div>
+            <div class="panel-body">
+                <img src="{{ neighbourhood.neighbourhood_photo.url }}"  alt="{{ neighbourhood.name }}"
+                height="300px">
+            </div>
+            <div class="panel-footer">
+                <h6 >
+                    <span><strong>{{neighbourhood.members.count}}</strong>
+                        Member{{neighbourhood.occupants_count | pluralize}}</span>
+                </h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid text-center">
+    <div class="container pt-3">
+        <div class="row">
+            <div class="col-md-12">
+                <a href="" class="btn btn-sm btn-success mb-4 mr-4" data-toggle="modal" data-target="#Business">New
+                    Business</a>
+                <a class="btn btn-sm btn-success mb-4" href="{% url 'index' %}">Exit Page</a>
+                {% if neighbourhood.admin == user.profile %}
+                {% endif %}
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active rgba-stylish-strong text-success" id="home-tab" data-toggle="tab"
+                            href="#home" role="tab" aria-controls="home" aria-selected="true">Business</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link rgba-stylish-strong text-success" id="profile-tab" data-toggle="tab"
+                            href="#profile" role="tab" aria-controls="profile" aria-selected="false">Posts</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <h5 class="D-block mt-3 mb-2 text-white">Available Businesses</h5>
+                        <div class="row">
+                            {% for busines in business %}
+                            <div class="col-md-4">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+                                        <h6 class="card-title text-success">{{busines.name}}:
+                                            <span class="text-muted" style="font-size: 14px;">{{busines.email}}</span>
+                                        </h6>
+                                        <p class="card-text text-dark">{{ busines.description }}</p>
+                                        <p class="card-text">
+                                            Owner: <small class="text-success">
+                                                {{ busines.user.user.username | title }}</small>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</body>
+{% endblock %}

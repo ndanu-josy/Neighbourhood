@@ -51,9 +51,7 @@ def create_neighbourhood(request):
         if form.is_valid():
             neighbourhood = form.save(commit=False)
             neighbourhood.admin = request.user
-            neighbourhood.save()
-            messages.success(
-                request, 'You have succesfully created a Neighbourhood')
+            neighbourhood.save()          
             return redirect('index')
     else:
         form = NeighbourHoodForm()
@@ -66,24 +64,35 @@ def join_neighbourhood(request, id):
     hood = get_object_or_404(Neighbourhood, id=id)
     request.user.profile.neighbourhood = hood
     request.user.profile.save()
-    return redirect('index')    
+    return redirect('index')  
+
 
 @login_required(login_url='/accounts/login/')
-def single_hood(request, hood_id):
+def leave_neighbourhood(request, id):
+    neighbourhood = get_object_or_404(Neighbourhood, id=id)
+    request.user.profile.neighbourhood = None
+    request.user.profile.save()   
+    return redirect('index')
+
+
+
+@login_required(login_url='/accounts/login/')
+def single_neighbourhood(request, hood_id):
     neighbourhood = Neighbourhood.objects.get(id=hood_id)
-    business = Business.objects.filter(neighbourhood=neighbourhood)
+
     posts = Post.objects.filter(neighbourhood=neighbourhood)
-    posts = posts[::-1]
+  
     if request.method == 'POST':
         form = BusinessForm(request.POST)
         if form.is_valid():
-            b_form = form.save(commit=False)
-            b_form.neighbourhood = neighbourhood
-            b_form.user = request.user.profile
-            b_form.save()
-            return redirect('single-hood', neighbourhood.id)
+            business_form = form.save(commit=False)
+            business_form.neighbourhood = neighbourhood
+            business_form.user = request.user.profile
+            business_form.save()
+            return redirect('single-hood', hood_id)
     else:
         form = BusinessForm()
     
-    return render(request, 'single_hood.html', { 'neighbourhood': neighbourhood, 'business': business,
+    return render(request, 'singlehood.html', { 'neighbourhood': neighbourhood, 
      'form': form,'posts': posts})
+
