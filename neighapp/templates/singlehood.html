@@ -25,7 +25,7 @@
 </div>
 
 <div class="container text-center">
-<a class="btn btn-info">Add Business</a>
+<a class="btn btn-info" href="{% url 'business' neighbourhood.id %}">Add Business</a>
 <a class="btn btn-info" href="{% url 'post' neighbourhood.id %}"> Create Post</a>
     <div class="row">{% for post in posts %}
         <div class="col-md-4">
@@ -44,12 +44,12 @@
         </div>
         {% endfor %}
 
-        {% for busines in business %}
+        {% for busines in businesses %}
         <div class="col-md-4">
             <div class="card mb-4">
                 <div class="card-body">
-                    <h6 class="card-title text-success">{{busines.name}}:
-                        <span class="text-muted" style="font-size: 14px;">{{busines.email}}</span>
+                    <h6 class="card-title text-success">{{busines.business_name}}:
+                        <span class="text-muted" style="font-size: 14px;">{{busines.business_email}}</span>
                     </h6>
                     <p class="card-text text-dark">{{ busines.description }}</p>
                     <p class="card-text">

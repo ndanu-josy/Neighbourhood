@@ -79,7 +79,7 @@ def leave_neighbourhood(request, id):
 @login_required(login_url='/accounts/login/')
 def single_neighbourhood(request, hood_id):
     neighbourhood = Neighbourhood.objects.get(id=hood_id)
-
+    businesses = Business.objects.get(id=neighbourhood_id)
     posts = Post.objects.filter(neighbourhood=neighbourhood)
   
     if request.method == 'POST':
@@ -110,3 +110,18 @@ def create_post(request, hood_id):
     else:
         form = PostForm()
     return render(request, 'createpost.html', {'form': form})
+
+@login_required(login_url='/accounts/login/')
+def add_business(request, hood_id):
+    neighbourhood = Neighbourhood.objects.get(id=hood_id)
+    if request.method == 'POST':
+        form = BusinessForm(request.POST)
+        if form.is_valid():
+            business = form.save(commit=False)
+            business.neighbourhood = neighbourhood
+            business.user = request.user.profile
+            business.save()           
+            return redirect('singleHood', neighbourhood.id)
+    else:
+        form = BusinessForm()
+    return render(request, 'addbusiness.html', {'form': form})
