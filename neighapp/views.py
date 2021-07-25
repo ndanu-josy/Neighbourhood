@@ -1,6 +1,6 @@
 from neighapp.models import Business, Neighbourhood, Post
 from django.contrib.auth import login
-from neighapp.forms import BusinessForm, NeighbourHoodForm, RegistrationForm, profileForm, userForm
+from neighapp.forms import BusinessForm, NeighbourHoodForm, PostForm, RegistrationForm, profileForm, userForm
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
@@ -96,3 +96,17 @@ def single_neighbourhood(request, hood_id):
     return render(request, 'singlehood.html', { 'neighbourhood': neighbourhood, 
      'form': form,'posts': posts})
 
+@login_required(login_url='/accounts/login/')
+def create_post(request, hood_id):
+    neighbourhood = Neighbourhood.objects.get(id=hood_id)
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.neighbourhood = neighbourhood
+            post.user = request.user.profile
+            post.save()           
+            return redirect('singleHood', neighbourhood.id)
+    else:
+        form = PostForm()
+    return render(request, 'createpost.html', {'form': form})
