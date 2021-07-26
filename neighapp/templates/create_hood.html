@@ -7,13 +7,14 @@ background-repeat:  no-repeat;
 font-family: 'Comic Sans MS', cursive, sans-serif;">
     <div class="container">
         <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-10 rgba-stylish-strong  p-4">
-                <h3 class="text-center pt-4">Add Your Neighbourhood Here</h3>
-                <form style="color:white;" action="" method="post" enctype="multipart/form-data" novalidate>
+            <div class="col-md-2"></div>
+            <div class="col-md-7 ">
+                <h3 class="text-center" style="background-color: goldenrod">Add Your Neighbourhood Here</h3>
+                <form  action="" method="post" enctype="multipart/form-data" novalidate>
                     {% csrf_token %}
                     {% bootstrap_form form %}
-                    <button class="btn btn-success btn-sm">Add Hood</button>
+                    <button style="background-color: #001d3d;"
+                    class="btn btn-primary ">Add Hood</button>
                 </form><br>
             </div>
             <div class="col-md-1"></div>

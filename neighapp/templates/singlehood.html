@@ -5,56 +5,57 @@
 {% block content %}
 
 <div class="container">
-    <div class=" col-md-6">
+    <div class="col-md-2"></div>
+    <div class=" col-md-7">
         <div class="panel panel-default">
-            <div class="panel-header">
-                {{ neighbourhood.name }}
-                {{neighbourhood.location}}
-            </div>
+           
             <div class="panel-body">
-                <img src="{{ neighbourhood.neighbourhood_photo.url }}" alt="{{ neighbourhood.name }}" height="300px">
+                <img src="{{ neighbourhood.neighbourhood_photo.url }}" alt="{{ neighbourhood.name }}" style="height:300px; width: 100%;">
             </div>
-            <div class="panel-footer">
-                <h6>
-                    <span><strong>{{neighbourhood.members.count}}</strong>
-                        Member{{neighbourhood.occupants_count | pluralize}}</span>
-                </h6>
+            <div class="panel-footer text-center">
+                <p><strong> {{neighbourhood.neighbourhood_location}}:</strong> {{ neighbourhood.neighbourhood_name}}</p>    
             </div>
         </div>
     </div>
 </div>
 
 <div class="container text-center">
-<a class="btn btn-info" href="{% url 'business' neighbourhood.id %}">Add Business</a>
-<a class="btn btn-info" href="{% url 'post' neighbourhood.id %}"> Create Post</a>
+    <a class="btn btn-info" href="{% url 'business' neighbourhood.id %}">Add Business</a>
+    <a class="btn btn-info" href="{% url 'post' neighbourhood.id %}"> Create Post</a>
+
+    <h2 style="color: goldenrod;">Members Posts</h2>
+    <hr>
     <div class="row">{% for post in posts %}
         <div class="col-md-4">
-            <div class="card mb-4">
+            <div class="card"  style=" background-color:#001d3d;">
                 <div class="card-body">
-                    <h6 class="card-title text-success">{{post.post_title}}:
-                        <span class="text-muted" style="font-size: 14px;">{{post.post_category}}</span>
+                    <h6 class="card-title text-warning">{{post.post_title}}:
+                        <span style="font-size: 14px; color: oldlace;">{{post.post_category}}</span>
                     </h6>
-                    <p class="card-text text-dark">{{ post.post_description }}</p>
+                    <p class="card-text" style="color: oldlace;">{{ post.post_description }}</p>
                     <p class="card-text">
-                        Posted by: <small class="text-success">
+                        Posted by: <small class="text-warning">
                             {{ post.user.user.username | title }}</small>
                     </p>
                 </div>
             </div>
         </div>
         {% endfor %}
-
+    </div>
+    <div class="row">
+        <h2 style="color: goldenrod;">Businesses in the area</h2>
+        <hr>
         {% for busines in businesses %}
-        <div class="col-md-4">
-            <div class="card mb-4">
+        <div class="col-md-4" >
+            <div class="card" style="background-color: #2b2d42;">
                 <div class="card-body">
-                    <h6 class="card-title text-success">{{busines.business_name}}:
+                    <h6 class="card-title text-warning">{{busines.business_name}}:
                         <span class="text-muted" style="font-size: 14px;">{{busines.business_email}}</span>
                     </h6>
                     <p class="card-text text-dark">{{ busines.description }}</p>
-                    <p class="card-text">
-                        Owner: <small class="text-success">
-                            {{ busines.user.user.username | title }}</small>
+                    <p class="card-text" style="color: white;">
+                        Owner: 
+                            {{ busines.user.user.username | title }}
                     </p>
                 </div>
             </div>
@@ -62,7 +63,7 @@
         {% endfor %}
     </div>
 </div>
-</div>
+
 <hr>
 
 
