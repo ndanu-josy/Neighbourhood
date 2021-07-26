@@ -17,11 +17,11 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.urls import path    
 from rest_framework.authtoken.views import obtain_auth_token
-
+from django.contrib.auth import views as views
 urlpatterns = [
     url('admin/', admin.site.urls),
     url(r'', include('neighapp.urls')),
-  
+    url(r'^logout/$', views.LogoutView.as_view(), {"next_page": '/'}),
     # path(r'^api-token-auth/', obtain_auth_token),
     
 ]
