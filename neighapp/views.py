@@ -125,3 +125,18 @@ def add_business(request, hood_id):
     else:
         form = BusinessForm()
     return render(request, 'addbusiness.html', {'form': form})
+
+@login_required(login_url='/accounts/login/')
+def search_business(request):    
+    if 'business' in request.GET and request.GET["business"]:
+        search_term = request.GET.get("business")
+        found_businesses = Business.find_business(search_term)
+        message = f"{search_term}"  
+
+        context = {"found_businesses":found_businesses,"message":message}
+
+        return render(request, 'search.html',context)
+
+    else:
+        message = "You haven't searched for any business"     
+        return render(request, 'search.html',{"message":message})

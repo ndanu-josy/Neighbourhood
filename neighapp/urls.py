@@ -14,4 +14,5 @@ urlpatterns=[
     path('singleHood/<hood_id>', views.single_neighbourhood, name='singleHood'),
     path('<hood_id>/post/', views.create_post, name='post'),
     path('<hood_id>/business/', views.add_business, name='business'),
+     url(r'^searchbusiness/', views.search_business, name='search'),
 ]

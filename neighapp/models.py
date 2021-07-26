@@ -73,8 +73,10 @@ class Business(models.Model):
         self.delete()   
 
     @classmethod
-    def find_business(cls, business_id):
-            return cls.objects.filter(id=business_id)
+    def find_business(cls, search_term):
+        businesses = cls.objects.filter(business_name__icontains=search_term)
+        return businesses
+    
 
     def update_business(self):
         name = self.business_name

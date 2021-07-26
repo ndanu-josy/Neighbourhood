@@ -135,9 +135,9 @@
 				<li><a href="{%url 'profile'%}"><span class="fa fa-phone"></span><span class="link"> Profile</span></a></li>
 			</ul>
 			<!-- Nav Right -->
-			<form class="navbar-form navbar-right">
+			<form class="navbar-form navbar-right" action="{% url 'search' %}">
 				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Search">
+					<input type="text" class="form-control" placeholder="Search business" name="business">
 				</div>
 				<button type="submit" class="btn"><span class="fa fa-search"></span></button>
 			</form>
