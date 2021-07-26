@@ -89,4 +89,13 @@ class Post(models.Model):
     post_title = models.CharField(max_length=100, null=True)
     post_description = models.TextField()
     date_posted = models.DateTimeField(auto_now_add=True)   
-    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE, related_name='neighbourhood_post')               
+    neighbourhood = models.ForeignKey(Neighbourhood, on_delete=models.CASCADE, related_name='neighbourhood_post')      
+
+    def __str__(self):
+        return self.post_title
+
+    def create_post(self):
+        self.save()   
+
+    def delete_post(self):
+        self.delete()            
