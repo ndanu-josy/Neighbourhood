@@ -1,35 +1,57 @@
 {%extends 'base.html'%}
 {%load bootstrap3%}
 {%block content%}
+<div class="container-fluid">
+    <div class="jumbotron text-center" style="background-image: url('https://images.pexels.com/photos/5191373/pexels-photo-5191373.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500');
+    
+    background-repeat: no-repeat;
+    background-size: cover;">
+        <p>At <strong style="color:goldenrod">Neighbourhood Watch</strong>
+            <br>
+            we thrive to keep you in the loop of what is happening around your locality.
+
+            <br>Can't find your area? <a class="btn btn-info" href="{% url 'createHood' %}" style="background-color: #001d3d;">Add Neighbourhood</a>
+        </p>
+
+    </div>
+</div>
 <div class="container">
-    <h1>Hello neighbour</h1>
-    <a class="btn btn-info" href="{% url 'createHood' %}">Create Neighbourhood</a>
+    
     <div class="row">
         {% for hood in hoods %}
-        <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-header">
-                    {{ hood.neighbourhood_location }}
-                </div>
-                <div class="panel-body">
-                    <img src="{{hood.neighbourhood_photo.url}}" class="img-responsive" alt="{{image.hood_name}}"
-                    style="width:100%;width:100%">
-                    {{ hood.neighbourhood_name }}
-                </div>
-                <div style="padding-top:1%;padding-bottom:1%">
-                    {%if request.user.profile.neighbourhood == hood %}
-                    <a class="btn btn-info btn-small" href="{% url 'singleHood' hood.id %}">View Hood</a>
-                    <a class="btn btn-warning" href="{%url 'leavehood' hood.id%}">Leave Hood</a>
-                    {%elif not request.user.profile.neighbourhood%}
-                    <a class="btn btn-default" href="{%url 'joinhood' hood.id%}">Join Hood</a>
-                    {%endif%}
+
+        <div class="container col-md-6">
+            <div class="panel panel-default" style="border-radius: 1%; border: 0.5px solid lightgrey; ">
+
+                <img src="{{hood.neighbourhood_photo.url}}" class="img-responsive" style="width: 100%; height: 400px;">
+
+
+                <div class="panel-footer" style="background-color: white;">
+                    <a><img src="https://img.icons8.com/ios/30/000000/like.png" /></a>
+                    <a href="/comment/{{post.id}}">
+                        <img src="https://img.icons8.com/ios/30/000000/topic.png" />
+                    </a>
+                    <a><img src="https://img.icons8.com/material-outlined/30/000000/filled-sent.png" /></a>
+
+                    <p><strong class="text-secondary pl-3"> {{ hood.neighbourhood_location }}: </strong>
+                        {{hood.neighbourhood_name }}</p>
+
+
+
+                    <div style="padding-top:1%;padding-bottom:1%">
+                        {%if request.user.profile.neighbourhood == hood %}
+                        <a class="btn btn-info btn-small" href="{% url 'singleHood' hood.id %}">View Hood</a>
+                        <a class="btn btn-warning" href="{%url 'leavehood' hood.id%}">Leave Hood</a>
+                        {%elif not request.user.profile.neighbourhood%}
+                        <a class="btn btn-default" href="{%url 'joinhood' hood.id%}">Join Hood</a>
+                        {%endif%}
+                    </div>
                 </div>
             </div>
-            <p></p>
         </div>
 
         {%endfor%}
-       
+
     </div>
 </div>
 

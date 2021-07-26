@@ -4,22 +4,22 @@
     <div class="row">
         <div class="col md-3"></div>
         {% if found_businesses %}
-        <h4 class="text-center">Found {{ found_businesses|length }} for search term <strong>{{message}}</strong> </h4>
+        <h2 class="text-center">Found {{ found_businesses|length }} businesses for search term <strong>{{message}}</strong> </h2>
         <hr>
         {% else %}
         <h4 class="text-center"> Found 0 businesses for search term {{message}}</h4>
         <hr>
         {% endif %}
     </div>
-    <div class="row text-center">
+    <div class="row">
         {% for business in found_businesses %}
         <div class="col-md-4">
-            <div class="card" style="width: 18rem;">
+            <div class="card" style=" background-color:#001d3d; height: 100px; width: 180px; color: white; padding-left: 20px;">
                 <div class="card-header">
                     Name : {{business.business_name}}
                 </div>
                 <div class="card-body">
-                    <p>Owner : {{business.user}}</p>
+                    <p>Owner : {{business.user}}</p> 
                     <p>Contact : {{business.business_email}}</p>
                 </div>
             </div>

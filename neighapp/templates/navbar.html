@@ -1,146 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bootstrap Simple Navbar with Search Box</title>
+<link href="https://fonts.googleapis.com/css?family=Raleway|Open+Sans" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+	body {
+		background: #eeeeee;
+		font-family: 'Open Sans', sans-serif;
+	}
+    .form-inline {
+        display: inline-block;
+    }
+	.navbar {
+		font-size: 14px;
+		background: #fff;
+		padding-left: 16px;
+		padding-right: 16px;
+		border-bottom: 1px solid #d6d6d6;
+		box-shadow: 0 0 4px rgba(0,0,0,.1);		
+	}
+	.navbar .navbar-brand {
+		color: #555;
+		padding-left: 0;
+		font-size: 20px;
+		padding-right: 50px;
+		font-family: 'Raleway', sans-serif;
+		text-transform: uppercase;
+	}
+	.navbar .navbar-brand b {
+		font-weight: bold;
+		color: goldenrod;
+	}
+	.navbar ul.nav li {
+		font-size: 96%;
+		font-weight: bold;		
+		text-transform: uppercase;
+	}
+	
+	.search-box {
+        position: relative;
+    }
+	.search-box input.form-control, .search-box .btn {
+		font-size: 14px;
+		border-radius: 2px !important;
+	}
+	.search-box .input-group-btn {
+		padding-left: 4px;		
+	}
+	
+	
+	.search-box .btn span {
+		transform: scale(0.9);
+		display: inline-block;
+	}
+	.navbar ul li i {
+		font-size: 18px;
+	}
+	.navbar .dropdown-menu i {
+		font-size: 16px;
+		min-width: 22px;
+	}
+	.navbar .dropdown.open > a {
+		background: none !important;
+	}
+	.navbar .dropdown-menu {
+		border-radius: 1px;
+		border-color: #e5e5e5;
+		box-shadow: 0 2px 8px rgba(0,0,0,.05);
+	}
+	.navbar .dropdown-menu li a {
+		color: #777;
+		padding: 8px 20px;
+		line-height: normal;
+		font-size: 14px;
+	}
+	.navbar .dropdown-menu li a:hover, .navbar .dropdown-menu li a:active {
+		color: #333;
+	}
+	.navbar .navbar-form {
+		border: none;
+	}
+	@media (min-width: 992px){
+		.form-inline .input-group .form-control {
+			width: 225px;			
+		}
+	}
+	@media (max-width: 992px){
+		.form-inline {
+			display: block;
+		}
+	}
+</style>
+</head> 
+<body>
+<nav class="navbar navbar-default navbar-expand-lg navbar-light">
+	<div class="navbar-header">
+    <a href="/"><img style="height: 50px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfNWlaGYKh-ajhfkpbKc3i7ETtXlD6qobZXw&usqp=CAUng" /></a>  
+			
+     
+	 		
+		<button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
+			<span class="navbar-toggler-icon"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+	</div>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
-  <style>
-     .container {
-  max-width: 960px;
-}
-.navbar-survival101 {
-  background-color:#2B6DAD;
-}
-/* .navbar-survival101 .navbar-brand {
-  margin-right: 2.15rem;
-  padding: 3px 0 0 0;
-  line-height: 36px;
-} */
+	<div id="navbarCollapse" class="collapse navbar-collapse">
+	
+			
+   
+	
+    <div class="col-sm-6 col-md-3 navbar-right " style="padding-right: 100px; padding-top: 10px;">
+      {% if user.is_authenticated %}
 
-.navbar-survival101 .navbar-brand img {
-  vertical-align: baseline;
-}
-
-.navbar-expand-lg .navbar-nav .nav-link {
-  color: #fff;
-}
-
-.search-box {
-  position: relative;
-  height: 34px;
-}
-.search-box input {
-  border: 0;
-  border-radius: 3px !important;
-  padding-right: 28px;
-  font-size: 15px;
-}
-
-.search-box .input-group-btn {
-  position: absolute;
-  right: 0;
-  top: 0;
-  z-index: 999;
-}
-
-.search-box .input-group-btn button {
-  background-color: transparent;
-  border: 0;
-  padding: 4px 8px;
-  color: rgba(0,0,0,.4);
-  font-size: 20px;
-}
-
-.search-box .input-group-btn button:hover,
-.search-box .input-group-btn button:active,
-.search-box .input-group-btn button:focus {
-  color: rgba(0,0,0,.4);
-}
-
-@media (min-width: 992px) {
-  .navbar-expand-lg .navbar-nav .nav-link {
-    padding-right: .7rem;
-    padding-left: .7rem;
-  }
-  
-  .search-box {
-    width: 300px !important;
-  }
-}
-
-.caroulsel {
-  width: 100%;
-  overflow: hidden;
-  padding: 5px 0 5px 5px;
-}
-
-.caroulsel-wrap {
-  white-space: nowrap;
-  font-size: 0;
-}
-
-.caroulsel-wrap a {
-  display: inline-block;
-  width: 134px;
-  height: 92px;
-  background-color: silver;
-  border: #ccc 1px solid;
-  margin-right: 5px;
-}
-
-    
-  </style>
-</head>
-
-
-
-<nav class="navbar navbar-inverse">
-	<div class="container-fluid">
-		<!-- Nav Header -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse-1" aria-expanded="false">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="/"><span class="fa fa-home"></span><span class="link"> Home</span></a>
-		</div>
-		<!-- Nav Collapse -->
-		<div class="navbar-collapse collapse" id="collapse-1">
-			<!-- Nav Left -->
-			<ul class="nav navbar-nav">
-				<!-- Products -->
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-						<span class="fa fa-tags"></span><span class="link"> Products</span> <span class="fa fa-caret-down"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="#"><span class="fa fa-tag"></span> Catalogue 1</a></li>
-						<li><a href="#"><span class="fa fa-tag"></span> Catalogue 2</a></li>
-					</ul>
-				</li>
-				<!-- Services -->
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-						<span class="fa fa-gears"></span><span class="link"> Services</span> <span class="fa fa-caret-down"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="#"><span class="fa fa-gear" /></span> Service 1</a></li>
-						<li><a href="#"><span class="fa fa-gear" /></span> Service 2</a></li>
-						<li><a href="#"><span class="fa fa-gear" /></span> Service 3</a></li>
-					</ul>
-				</li>
-				<!-- About -->
-				<li><a href="#"><span class="fa fa-info-circle"></span><span class="link"> About</span></a></li>
-				<!-- Contact -->
-				<li><a href="{%url 'profile'%}"><span class="fa fa-phone"></span><span class="link"> Profile</span></a></li>
-			</ul>
-			<!-- Nav Right -->
-			<form class="navbar-form navbar-right" action="{% url 'search' %}">
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Search business" name="business">
-				</div>
-				<button type="submit" class="btn"><span class="fa fa-search"></span></button>
-			</form>
-		</div>
+      <a href="/"><img src="https://img.icons8.com/material-rounded/24/000000/home.png" /></a>  
+			
+     
+         
+      <a href="/profile"><img src="https://img.icons8.com/material-outlined/24/000000/user--v1.png"/></a>
+      <a class="glyphicon glyphicon-log-out glyph" href="/logout">Logout</a>
+      {% else %}
+      <a class="glyphicon glyphicon-log-in glyph" href="/accounts/login">Login</a>
+      <a class='btn btn-default' href="/accounts/register">Register</a>
+      {% endif %}
+    </div>
+		<form class="navbar-form form-inline navbar-center ml-auto" action="{% url 'search' %}" style="padding-left: 200px;">
+			<div class="input-group search-box">
+				<input type="text" class="form-control" name="business" placeholder="Search business"> 
+				<span class="input-group-btn">
+					<button type="submit" class="btn " style="background-color:#001d3d; color: goldenrod; "><span>Search</span></button>
+				</span>
+			</div>
+		</form>		
 	</div>
 </nav>
+</body>
+</html> 
